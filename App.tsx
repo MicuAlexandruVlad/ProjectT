@@ -9,6 +9,8 @@ import { Provider, useSelector } from 'react-redux'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import AppContainer from './AppContainer'
 import * as Font from 'expo-font'
+import darkTheme from './src/ui/theme/DarkTheme'
+import lightTheme from './src/ui/theme/LightTheme'
 
 const queryClient = new QueryClient()
 
@@ -39,6 +41,16 @@ export default function App() {
 			UIManager.setLayoutAnimationEnabledExperimental(true)
 		}
 	}, [])
+
+	useEffect(() => {
+        const sub = Appearance.addChangeListener(({ colorScheme }) => {
+			const isDarkTheme = colorScheme === 'dark'
+
+			dispatch(setTheme(isDarkTheme))
+        })
+
+        return () => sub.remove()
+    }, [])
 	
 	return (
 		<GestureHandlerRootView style={{ flex: 1 }}>

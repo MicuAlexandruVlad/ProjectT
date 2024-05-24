@@ -17,7 +17,7 @@ const Loader: React.FC<Props> = ({ loading }) => {
 	const uiController = useSelector<AppStore, UIController>((store) => store.uiController)
 	const theme = uiController.isDarkTheme ? darkTheme : lightTheme
     
-    const loadingAnim = require('../../assets/animations/loading.json')
+    const loadingAnim = require('../../../assets/animations/loading.json')
     
     return (
         <Modal
@@ -25,7 +25,7 @@ const Loader: React.FC<Props> = ({ loading }) => {
             animationType='fade'
             transparent>
             <View
-                style={{ 
+                style={{
                     flex: 1,
                     backgroundColor: `${theme.colors.background}00`,
                     alignItems: 'center',

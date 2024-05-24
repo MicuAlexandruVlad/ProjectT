@@ -57,7 +57,8 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
         fontSize: 24,
         // fontWeight: 'bold',
         marginLeft: 8,
-        fontFamily: 'NunitoSans-Bold'
+        fontFamily: 'Inter-Bold',
+        letterSpacing: dimensions.LETTER_SPACING + 1
     },
     animation: {
         width: dimensions.WIDTH / 3.5,

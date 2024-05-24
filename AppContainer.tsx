@@ -26,7 +26,7 @@ const AppContainer: React.FC = (): React.JSX.Element => {
 			height: '100%',
 		}}>
 			<StatusBar backgroundColor={ theme.colors.background } barStyle={ isDarkTheme ? 'light-content' : 'dark-content' } />
-			{/* <StackNav /> */}
+			<StackNav />
 			<Loader loading={ isLoading } />
 		</View>
 	)

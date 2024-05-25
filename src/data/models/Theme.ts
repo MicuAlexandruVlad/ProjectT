@@ -1,9 +1,8 @@
-import ThemeContainer from "./ThemeContainer"
 
 export default interface Theme {
-	isDark: boolean
 	colors: {
 		primary: string
+		surfaceTint: string
 		onPrimary: string
 		primaryContainer: string
 		onPrimaryContainer: string
@@ -23,36 +22,33 @@ export default interface Theme {
 		onBackground: string
 		surface: string
 		onSurface: string
-		outline: string
 		surfaceVariant: string
 		onSurfaceVariant: string
-		inverseOnSurface: string,
-        inverseSurface: string,
-        inversePrimary: string,
-        shadow: string,
-        surfaceTint: string,
-        outlineVariant: string,
-        scrim: string,
-		inputBackground: string,
-	}
-	eventCategoryColors: {
-		artsCulture: ThemeContainer
-		businessProfessional: ThemeContainer
-		technologyInnovation: ThemeContainer
-		educationLearning: ThemeContainer
-		healthWellness: ThemeContainer
-		entertainmentRecreation: ThemeContainer
-		foodDrink: ThemeContainer
-		sportsFitness: ThemeContainer
-		travelAdventure: ThemeContainer
-		familyParenting: ThemeContainer
-		science: ThemeContainer
-		social: ThemeContainer
-		environmentSustainability: ThemeContainer
-		fashionBeauty: ThemeContainer
-		financeInvestment: ThemeContainer
-		governmentPolitics: ThemeContainer
-		religionSpirituality: ThemeContainer
-		charityCauses: ThemeContainer
+		outline: string
+		outlineVariant: string
+		shadow: string
+		scrim: string
+		inverseSurface: string
+		inverseOnSurface: string
+		inversePrimary: string
+		primaryFixed: string
+		onPrimaryFixed: string
+		primaryFixedDim: string
+		onPrimaryFixedVariant: string
+		secondaryFixed: string
+		onSecondaryFixed: string
+		secondaryFixedDim: string
+		onSecondaryFixedVariant: string
+		tertiaryFixed: string
+		onTertiaryFixed: string
+		tertiaryFixedDim: string
+		onTertiaryFixedVariant: string
+		surfaceDim: string
+		surfaceBright: string
+		surfaceContainerLowest: string
+		surfaceContainerLow: string
+		surfaceContainer: string
+		surfaceContainerHigh: string
+		surfaceContainerHighest: string
 	}
 }

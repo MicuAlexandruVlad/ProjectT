@@ -11,6 +11,7 @@ import AppContainer from './AppContainer'
 import * as Font from 'expo-font'
 import darkTheme from './src/ui/theme/DarkTheme'
 import lightTheme from './src/ui/theme/LightTheme'
+import ThemeUtils from './src/utils/ThemeUtils'
 
 const queryClient = new QueryClient()
 
@@ -35,7 +36,12 @@ export default function App() {
 	}, [])
 
 	useEffect(() => {
-		dispatch(setTheme(Appearance.getColorScheme() === 'dark'))
+		const isDarkTheme = Appearance.getColorScheme() === 'dark'
+		const color = isDarkTheme ? darkTheme.colors.background : lightTheme.colors.background
+
+		ThemeUtils.changeNavbarColor(color, isDarkTheme)
+		
+		dispatch(setTheme(isDarkTheme))
 
 		if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
 			UIManager.setLayoutAnimationEnabledExperimental(true)
@@ -45,6 +51,9 @@ export default function App() {
 	useEffect(() => {
         const sub = Appearance.addChangeListener(({ colorScheme }) => {
 			const isDarkTheme = colorScheme === 'dark'
+			const color = isDarkTheme ? darkTheme.colors.background : lightTheme.colors.background
+
+			ThemeUtils.changeNavbarColor(color, isDarkTheme)
 
 			dispatch(setTheme(isDarkTheme))
         })

@@ -1,5 +1,5 @@
 
-export default interface Palette {
+export interface Palette {
 	"0": string
 	"5": string
 	"10": string
@@ -18,4 +18,12 @@ export default interface Palette {
 	"98": string
 	"99": string
 	"100": string
+}
+
+export default interface Palettes {
+	primary: Palette
+	seconday: Palette
+	tertiary: Palette
+	neutral: Palette
+	neutralVariant: Palette
 }

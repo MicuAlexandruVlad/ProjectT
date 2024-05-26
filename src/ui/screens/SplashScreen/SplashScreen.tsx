@@ -7,6 +7,7 @@ import AnimatedLottieView from "lottie-react-native"
 import { NavigationProp } from '@react-navigation/native'
 import RootStackParamList from '../../../navigation/RootStackParamList'
 import ThemeUtils from '../../../utils/ThemeUtils'
+import Routes from '../../../navigation/Routes'
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -20,6 +21,15 @@ const SplashScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const loadingAnim = require('../../../../assets/animations/loading.json')
     
     const styles = styleSheet(theme)
+
+    useEffect(() => {
+        setTimeout(() => {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: Routes.LOGIN_SCREEN }]
+            })
+        }, 2000)
+    }, [])
     
     return (
         <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>

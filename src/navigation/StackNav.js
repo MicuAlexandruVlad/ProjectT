@@ -4,6 +4,8 @@ import Routes from './Routes'
 import darkTheme from '../ui/theme/DarkTheme'
 import lightTheme from '../ui/theme/LightTheme'
 import SplashScreen from '../ui/screens/SplashScreen/SplashScreen'
+import LoginScreen from '../ui/screens/LoginScreen/LoginScreen'
+import RegisterScreen from '../ui/screens/RegisterScreen/RegisterScreen'
 
 
 const Stack = createStackNavigator()
@@ -28,14 +30,14 @@ const StackNav = () => {
                     headerShown: false
                 }}
                 />
-            {/* <Stack.Screen
+           <Stack.Screen
                 name={ Routes.LOGIN_SCREEN }
                 component={ LoginScreen }
                 options={{
                     title: 'Login',
                     headerShown: false
                 }}
-                />
+                /> 
             <Stack.Screen
                 name={ Routes.REGISTER_SCREEN }
                 component={ RegisterScreen }
@@ -43,7 +45,7 @@ const StackNav = () => {
                     title: 'Register',
                     headerShown: false
                 }}
-                /> */}
+                />
         </Stack.Navigator>
     )
 }

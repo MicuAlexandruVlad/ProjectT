@@ -14,8 +14,8 @@ export const dimensions = {
     WIDTH: Dimensions.get('window').width,
     HEIGHT: Dimensions.get('window').height,
     MARGIN: 20,
-    BORDER_RADIUS: 16,
-    LETTER_SPACING: 0.3,
+    BORDER_RADIUS: 40,
+    LETTER_SPACING: 0.5,
     TOUCHABLE_ACTIVE_OPACITY: 0.7,
 }
 

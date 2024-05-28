@@ -18,9 +18,6 @@ const StackNav = () => {
     return (
         <Stack.Navigator
             initialRouteName={ Routes.SPLASH_SCREEN }
-            screenOptions={{
-                cardStyle: { backgroundColor: theme.colors.background }
-            }}
         >
             <Stack.Screen
                 name={ Routes.SPLASH_SCREEN }

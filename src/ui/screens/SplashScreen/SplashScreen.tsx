@@ -8,6 +8,9 @@ import { NavigationProp } from '@react-navigation/native'
 import RootStackParamList from '../../../navigation/RootStackParamList'
 import ThemeUtils from '../../../utils/ThemeUtils'
 import Routes from '../../../navigation/Routes'
+import AsyncStorageUtils from '../../../utils/AsyncStorageUtils'
+import { setJwt } from '../../../redux/slices/authTokens'
+import { setUser } from '../../../redux/slices/user'
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -23,13 +26,28 @@ const SplashScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const styles = styleSheet(theme)
 
     useEffect(() => {
-        setTimeout(() => {
+        startupLogic()
+    }, [])
+    
+    const startupLogic = async () => {
+        const user = await AsyncStorageUtils.getActiveUser()
+        const token = await AsyncStorageUtils.getApiToken()
+
+        if (user && token) {
+            dispatch(setUser(user))
+            dispatch(setJwt(token))
+        
+            navigation.reset({
+                index: 0,
+                routes: [{ name: Routes.MAIN_SCREEN }]
+            })
+        } else {
             navigation.reset({
                 index: 0,
                 routes: [{ name: Routes.LOGIN_SCREEN }]
             })
-        }, 2000)
-    }, [])
+        }
+    }
     
     return (
         <View style={{ backgroundColor: theme.colors.background, flex: 1 }}>

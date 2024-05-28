@@ -37,6 +37,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
 
             dispatch(setUser(user))
             dispatch(setJwt(token))
+
+            navigation.navigate(Routes.MAIN_SCREEN)
         }).catch(() => {
             alert('Failed to login')
         })

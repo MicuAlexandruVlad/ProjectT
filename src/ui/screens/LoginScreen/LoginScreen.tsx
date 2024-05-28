@@ -4,13 +4,14 @@ import RootStackParamList from "../../../navigation/RootStackParamList"
 import Theme from "../../../data/models/Theme"
 import { StyleSheet, View, Text, ScrollView, KeyboardAvoidingView } from "react-native"
 import ThemeUtils from "../../../utils/ThemeUtils"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { dimensions } from "../../../utils/Constants"
 import Input from "../../shared/inputs/Input"
 import Button from "../../shared/Button"
 import Routes from "../../../navigation/Routes"
 import Api from "../../../network/Api"
-import AsyncStorageUtils from "../../../utils/AsyncStorageUtils"
+import { setUser } from "../../../redux/slices/user"
+import { setJwt } from "../../../redux/slices/authTokens"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -19,6 +20,7 @@ type Props = {
 const TAG = 'LoginScreen:'
 const LoginScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const theme = ThemeUtils.getTheme(useSelector)
+    const dispatch = useDispatch()
 
     const styles = styleSheet(theme)
 
@@ -31,7 +33,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
         }
 
         Api.login(email, password).then(res => {
-            AsyncStorageUtils.setApiToken(res.token)
+            const { user, token } = res
+
+            dispatch(setUser(user))
+            dispatch(setJwt(token))
         }).catch(() => {
             alert('Failed to login')
         })

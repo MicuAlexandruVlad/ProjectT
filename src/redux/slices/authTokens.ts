@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import AuthTokens from "../../data/models/AuthTokens"
+import AsyncStorageUtils from "../../utils/AsyncStorageUtils"
   
 const initialState: AuthTokens = {
     jwt: '',
@@ -11,12 +12,13 @@ export const authTokensSlice = createSlice({
     initialState,
     reducers: {
         setJwt: (state, action: PayloadAction<string>) => {
-            console.log(TAG, 'setJwt:', action.payload)
             state.jwt = action.payload
+            AsyncStorageUtils.setApiToken(action.payload)
         },
 
         resetAuthTokens: (state) => {
             state.jwt = ''
+            AsyncStorageUtils.removeApiToken()
         }
     }
 })

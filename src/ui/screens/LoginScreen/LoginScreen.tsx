@@ -9,11 +9,14 @@ import { dimensions } from "../../../utils/Constants"
 import Input from "../../shared/inputs/Input"
 import Button from "../../shared/Button"
 import Routes from "../../../navigation/Routes"
+import Api from "../../../network/Api"
+import AsyncStorageUtils from "../../../utils/AsyncStorageUtils"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
 }
 
+const TAG = 'LoginScreen:'
 const LoginScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const theme = ThemeUtils.getTheme(useSelector)
 
@@ -23,15 +26,23 @@ const LoginScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const [password, setPassword] = React.useState<string>('')
 
     const onSignIn = React.useCallback(() => {
-        
-    }, [])
+        if (!email || !password) {
+            return alert('Please fill in all fields')
+        }
+
+        Api.login(email, password).then(res => {
+            AsyncStorageUtils.setApiToken(res.token)
+        }).catch(() => {
+            alert('Failed to login')
+        })
+    }, [email, password])
 
     const onSignUp = React.useCallback(() => {
         navigation.navigate(Routes.REGISTER_SCREEN)
     }, [])
     
     return (
-        <ScrollView style={ styles.container } contentContainerStyle={{ flexGrow: 1, padding: 20 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 20 }}>
             <KeyboardAvoidingView style={{ flex: 1 }}>
                 <Text style={ styles.logoText }>Project T</Text>
                 <Text style={ styles.title }>Sign In</Text>
@@ -75,10 +86,6 @@ const LoginScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
 }
 
 const styleSheet = (theme: Theme) => StyleSheet.create({
-    container: {
-        backgroundColor: theme.colors.background,
-    },
-
     logoText: {
         fontSize: 30,
         fontFamily: 'Inter-Bold',

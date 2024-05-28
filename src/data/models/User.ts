@@ -5,3 +5,10 @@ export default interface User {
     lastName: string
     email: string
 }
+
+export interface UnregisteredUser {
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+}

@@ -5,6 +5,7 @@ const constants = {
     THEME_DARK: 'theme-dark',
     THEME_LIGHT: 'theme-light',
     ACTIVE_USER_ID: 'active_user_id',
+    ACTIVE_API_TOKEN: 'active_api_token',
     ACTIVE_USER_DATA: 'activeUserData',
     API_TIMEOUT: 5000,
     AUTH_TOKEN: 'auth_token',

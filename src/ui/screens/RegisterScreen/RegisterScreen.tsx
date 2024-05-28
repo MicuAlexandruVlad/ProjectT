@@ -9,6 +9,8 @@ import { dimensions } from "../../../utils/Constants"
 import Input from "../../shared/inputs/Input"
 import Button from "../../shared/Button"
 import Routes from "../../../navigation/Routes"
+import { UnregisteredUser } from "../../../data/models/User"
+import Api from "../../../network/Api"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -25,16 +27,36 @@ const RegisterScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const [firstName, setFirstName] = React.useState<string>('')
     const [lastName, setLastName] = React.useState<string>('')
 
-    const onSignUp = React.useCallback(() => {
-        
-    }, [])
+    const onSignUp = () => {
+        if (password !== confirmPassword) {
+            return alert('Passwords do not match')
+        }
+
+        if (!email || !password || !confirmPassword || !firstName || !lastName) {
+            return alert('Please fill in all fields')
+        }
+
+        const user: UnregisteredUser = {
+            email,
+            password,
+            firstName,
+            lastName
+        }
+
+        Api.register(user).then(() => {
+            alert('Successfully registered')
+            navigation.goBack()
+        }).catch(() => {
+            alert('Failed to register')
+        })
+    }
 
     const onSignIn = React.useCallback(() => {
         navigation.goBack()
     }, [])
     
     return (
-        <ScrollView style={ styles.container } contentContainerStyle={{ flexGrow: 1, padding: 20 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 20 }}>
             <KeyboardAvoidingView style={{ flex: 1 }}>
                 <Text style={ styles.logoText }>Project T</Text>
                 <Text style={ styles.title }>Sign Up</Text>

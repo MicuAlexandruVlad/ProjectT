@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import { Appearance, Platform, SafeAreaView, StyleSheet, Text, UIManager, View } from 'react-native'
 import store from './src/redux/store'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { setTheme } from './src/redux/slices/uiController'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { DefaultTheme, NavigationContainer, NavigationState } from '@react-navigation/native'
@@ -12,12 +12,15 @@ import * as Font from 'expo-font'
 import darkTheme from './src/ui/theme/DarkTheme'
 import lightTheme from './src/ui/theme/LightTheme'
 import ThemeUtils from './src/utils/ThemeUtils'
+import Routes from './src/navigation/Routes'
 
 const queryClient = new QueryClient()
 
 const TAG = 'App:'
 export default function App() {
 	const dispatch = store.dispatch
+
+	const [inMainScreen, setInMainScreen] = useState(false)
 
 	useEffect(() => {
 		Font.loadAsync({
@@ -37,9 +40,6 @@ export default function App() {
 
 	useEffect(() => {
 		const isDarkTheme = Appearance.getColorScheme() === 'dark'
-		const color = isDarkTheme ? darkTheme.colors.background : lightTheme.colors.background
-
-		ThemeUtils.changeNavbarColor(color, isDarkTheme)
 		
 		dispatch(setTheme(isDarkTheme))
 
@@ -51,26 +51,46 @@ export default function App() {
 	useEffect(() => {
         const sub = Appearance.addChangeListener(({ colorScheme }) => {
 			const isDarkTheme = colorScheme === 'dark'
-			const color = isDarkTheme ? darkTheme.colors.background : lightTheme.colors.background
+			const theme = isDarkTheme ? darkTheme : lightTheme
 
-			ThemeUtils.changeNavbarColor(color, isDarkTheme)
+			if (inMainScreen) {
+				ThemeUtils.changeNavbarColor(theme.colors.surfaceContainerLowest, isDarkTheme)
+			} else {
+				ThemeUtils.changeNavbarColor(theme.colors.background, isDarkTheme)
+			}
 
 			dispatch(setTheme(isDarkTheme))
         })
 
         return () => sub.remove()
-    }, [])
+    }, [inMainScreen])
+
+	const routeChangeListener = useCallback((state: NavigationState | undefined) => {
+		if (state) {
+			const theme = ThemeUtils.getThemeFromStore()
+			const isDarkTheme = ThemeUtils.isDarkThemeFromStore()
+			const isMainScreen = state.routes[state.index].name === Routes.MAIN_SCREEN
+			const color = isMainScreen ? theme.colors.surfaceContainerLowest : theme.colors.background
+
+			setInMainScreen(isMainScreen)
+
+			ThemeUtils.changeNavbarColor(color, isDarkTheme, true)
+		}
+	}, [])
 	
 	return (
 		<GestureHandlerRootView style={{ flex: 1 }}>
 			<SafeAreaView>
-				<NavigationContainer theme={{
-					...DefaultTheme,
-					colors: {
-						...DefaultTheme.colors,
-						background: 'transparent',
-					},
-				}}>
+				<NavigationContainer
+					theme={{
+						...DefaultTheme,
+						colors: {
+							...DefaultTheme.colors,
+							background: 'transparent',
+						},
+					}}
+					onStateChange={ routeChangeListener }
+				>
 					<Provider store={ store }>
 						<QueryClientProvider client={ queryClient }>
 							<AppContainer />

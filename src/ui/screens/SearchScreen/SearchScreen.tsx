@@ -5,19 +5,20 @@ import { View, Text, StyleSheet } from "react-native"
 import Theme from "../../../data/models/Theme"
 import ThemeUtils from "../../../utils/ThemeUtils"
 import { useSelector } from "react-redux"
-import TabNav from "../../../navigation/TabNav"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
 }
 
-const MainScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
+const SearchScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const theme = ThemeUtils.getTheme(useSelector)
 
     const styles = styleSheet(theme)
 
     return (
-        <TabNav/>
+        <View>
+            <Text>Search Screen</Text>
+        </View>
     )
 }
 
@@ -27,4 +28,4 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
     }
 })
 
-export default MainScreen
+export default SearchScreen

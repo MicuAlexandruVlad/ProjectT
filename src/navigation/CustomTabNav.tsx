@@ -8,6 +8,7 @@ import UIController from '../data/models/UIController'
 import darkTheme from '../ui/theme/DarkTheme'
 import lightTheme from '../ui/theme/LightTheme'
 import Theme from '../data/models/Theme'
+import { Entypo, FontAwesome, Ionicons } from '@expo/vector-icons'
 
 type Props = {
     state: any
@@ -19,21 +20,24 @@ const CustomTabNav: React.FC<Props> = ({ state, descriptors, navigation }) => {
 	const uiController = useSelector<AppStore, UIController>((store) => store.uiController)
 	const theme = uiController.isDarkTheme ? darkTheme : lightTheme
 
-    const home = require('../../assets/images/home.png')
-    const search = require('../../assets/images/search.png')
-    const explore = require('../../assets/images/explore.png')
-    const settings = require('../../assets/images/settings.png')
-
-    const getIcon = (label: string) => {
+    const getIcon = (label: string, isFocused: boolean) => {
         switch(label.toLowerCase()) {
             case 'home': 
-                return home
+                return (
+                    <Entypo name="home" size={22} color={ isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant } />
+                )
             case 'search': 
-                return search
+                return (
+                    <Entypo name="magnifying-glass" size={22} color={ isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant } />
+                )
             case 'explore':
-                return explore
+                return (
+                    <Entypo name="compass" size={22} color={ isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant } />
+                )
             case 'settings':
-                return settings
+                return (
+                    <Entypo name="cog" size={22} color={ isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant } />
+                )
         }
     }
 
@@ -92,12 +96,7 @@ const CustomTabNav: React.FC<Props> = ({ state, descriptors, navigation }) => {
                                 onLongPress={ onLongPress }
                             >
                                 <View>
-                                    <Image 
-                                        source={ getIcon(label) } 
-                                        style={{
-                                            ...styles.icon,
-                                            tintColor: isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant
-                                        }} />
+                                    { getIcon(label, isFocused) }
                                 </View>
                             </TouchableOpacity>
                         </View>

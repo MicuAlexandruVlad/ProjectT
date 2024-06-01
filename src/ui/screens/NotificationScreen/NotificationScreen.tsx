@@ -10,14 +10,14 @@ type Props = {
     navigation: NavigationProp<RootStackParamList>
 }
 
-const SettingsScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
+const NotificationScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const theme = ThemeUtils.getTheme(useSelector)
 
     const styles = styleSheet(theme)
 
     return (
         <View>
-            <Text>Settings Screen</Text>
+            <Text>Notification Screen</Text>
         </View>
     )
 }
@@ -28,4 +28,4 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
     }
 })
 
-export default SettingsScreen
+export default NotificationScreen

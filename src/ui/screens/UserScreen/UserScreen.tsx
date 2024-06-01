@@ -10,14 +10,14 @@ type Props = {
     navigation: NavigationProp<RootStackParamList>
 }
 
-const ExploreScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
+const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const theme = ThemeUtils.getTheme(useSelector)
 
     const styles = styleSheet(theme)
 
     return (
         <View>
-            <Text>Explore Screen</Text>
+            <Text>User Screen</Text>
         </View>
     )
 }
@@ -28,4 +28,4 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
     }
 })
 
-export default ExploreScreen
+export default UserScreen

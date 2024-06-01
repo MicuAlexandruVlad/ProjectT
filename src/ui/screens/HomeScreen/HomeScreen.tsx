@@ -5,6 +5,7 @@ import { View, Text, StyleSheet } from "react-native"
 import Theme from "../../../data/models/Theme"
 import ThemeUtils from "../../../utils/ThemeUtils"
 import { useSelector } from "react-redux"
+import FloatingButton from "../../shared/FloatingButton"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -15,9 +16,14 @@ const HomeScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
 
     const styles = styleSheet(theme)
 
+    const onNewPost = React.useCallback(() => {}, [])
+
     return (
-        <View>
-            <Text>Home Screen</Text>
+        <View style={ styles.container }>
+            <Text style={{ color: theme.colors.onBackground }}>Home Screen</Text>
+            <FloatingButton
+                onPress={ onNewPost }
+            />
         </View>
     )
 }

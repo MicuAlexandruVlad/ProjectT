@@ -17,6 +17,15 @@ type Props = {
 }
 
 const CustomTabNav: React.FC<Props> = ({ state, descriptors, navigation }) => {
+    const homeIcon = require('../../assets/images/home.png')
+    const homeFilledIcon = require('../../assets/images/home_filled.png')
+    const searchIcon = require('../../assets/images/search.png')
+    const searchFilledIcon = require('../../assets/images/search_filled.png')
+    const notificationIcon = require('../../assets/images/notification.png')
+    const notificationFilledIcon = require('../../assets/images/notification_filled.png')
+    const userIcon = require('../../assets/images/user.png')
+    const userFilledIcon = require('../../assets/images/user_filled.png')
+    
 	const uiController = useSelector<AppStore, UIController>((store) => store.uiController)
 	const theme = uiController.isDarkTheme ? darkTheme : lightTheme
 
@@ -24,19 +33,35 @@ const CustomTabNav: React.FC<Props> = ({ state, descriptors, navigation }) => {
         switch(label.toLowerCase()) {
             case 'home': 
                 return (
-                    <Entypo name="home" size={22} color={ isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant } />
+                    <Image source={ isFocused ? homeFilledIcon : homeIcon } style={{
+                        ...styles.icon,
+                        tintColor: isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant
+                    }} />
                 )
             case 'search': 
                 return (
-                    <Entypo name="magnifying-glass" size={22} color={ isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant } />
+                    <Image source={ isFocused ? searchFilledIcon : searchIcon } style={{
+                        ...styles.icon,
+                        width: 20,
+                        height: 20,
+                        tintColor: isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant
+                    }} />
                 )
-            case 'explore':
+            case 'notification':
                 return (
-                    <Entypo name="compass" size={22} color={ isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant } />
+                    <Image source={ isFocused ? notificationFilledIcon : notificationIcon } style={{
+                        ...styles.icon,
+                        tintColor: isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant
+                    }} />
                 )
-            case 'settings':
+            case 'user':
                 return (
-                    <Entypo name="cog" size={22} color={ isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant } />
+                    <Image source={ isFocused ? userFilledIcon : userIcon } style={{
+                        ...styles.icon,
+                        width: 21,
+                        height: 21,
+                        tintColor: isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant
+                    }} />
                 )
         }
     }

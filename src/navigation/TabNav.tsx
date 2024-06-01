@@ -2,8 +2,8 @@ import React, { memo, useMemo } from 'react'
 import CustomTabNav from './CustomTabNav'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from '../ui/screens/HomeScreen/HomeScreen'
-import ExploreScreen from '../ui/screens/ExploreScreen/ExploreScreen'
-import SettingsScreen from '../ui/screens/SettingsScreen/SettingsScreen'
+import NotificationScreen from '../ui/screens/NotificationScreen/NotificationScreen'
+import UserScreen from '../ui/screens/UserScreen/UserScreen'
 import SearchScreen from '../ui/screens/SearchScreen/SearchScreen'
 
 
@@ -25,10 +25,10 @@ const TabNav = () => {
             <Tab.Screen name='search' component={ SearchScreen } options={{
                 headerShown: false
             }} />
-            <Tab.Screen name='explore' component={ ExploreScreen } options={{
+            <Tab.Screen name='notification' component={ NotificationScreen } options={{
                 headerShown: false
             }} />
-            <Tab.Screen name='settings' component={ SettingsScreen } options={{
+            <Tab.Screen name='user' component={ UserScreen } options={{
                 headerShown: false,
                 lazy: false
             }}/>

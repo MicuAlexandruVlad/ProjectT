@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ProjectT",
-    "slug": "ProjectT",
+    "slug": "project-t",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,7 +12,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.brainspot.ProjectT"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,6 +28,15 @@
     "plugins": [
       "expo-router",
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d8a85732-5df0-4171-a379-d3d3c9bde6a7"
+      }
+    },
+    "owner": "ct50vld"
   }
 }

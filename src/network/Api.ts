@@ -42,10 +42,10 @@ export default class Api {
             }).then(response => {
                 const data = response.data
                 const user: User = {
-                    id: data.id,
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    email: data.email
+                    id: data.user.id,
+                    firstName: data.user.firstName,
+                    lastName: data.user.lastName,
+                    email: data.user.email
                 }
                 
                 resolve({

@@ -20,7 +20,7 @@ const ViewSwitcher: React.FC<Props> = ({ options, onOptionPress }): React.JSX.El
         <View style={ styles.container }>
         {
             options.map((option, index) => (
-                <TouchableOpacity style={{
+                <TouchableOpacity activeOpacity={ .6 } style={{
                     ...styles.button,
                     backgroundColor: !option.selected ? theme.colors.surfaceContainerHighest : theme.colors.secondaryFixed
                 }} key={ index } onPress={ () => onOptionPress(index) }>
@@ -44,8 +44,13 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
     },
 
     button: {
+        width: '20%',
         padding: 10,
-        borderRadius: 20
+        borderRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        minWidth: 80,
+        maxWidth: 100
     },
     
     text: {

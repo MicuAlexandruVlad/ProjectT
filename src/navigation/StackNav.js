@@ -7,6 +7,7 @@ import SplashScreen from '../ui/screens/SplashScreen/SplashScreen'
 import LoginScreen from '../ui/screens/LoginScreen/LoginScreen'
 import RegisterScreen from '../ui/screens/RegisterScreen/RegisterScreen'
 import MainScreen from '../ui/screens/MainScreen/MainScreen'
+import SettingsScreen from '../ui/screens/SettingsScreen/SettingsScreen'
 
 
 const Stack = createStackNavigator()
@@ -49,6 +50,14 @@ const StackNav = () => {
                 component={ MainScreen }
                 options={{
                     title: 'Main',
+                    headerShown: false
+                }}
+                />
+            <Stack.Screen
+                name={ Routes.SETTINGS_SCREEN }
+                component={ SettingsScreen }
+                options={{
+                    title: 'Settings',
                     headerShown: false
                 }}
                 />

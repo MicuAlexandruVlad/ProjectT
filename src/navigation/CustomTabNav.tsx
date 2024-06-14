@@ -35,7 +35,7 @@ const CustomTabNav: React.FC<Props> = ({ state, descriptors, navigation }) => {
                 return (
                     <Image source={ isFocused ? homeFilledIcon : homeIcon } style={{
                         ...styles.icon,
-                        tintColor: isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant
+                        tintColor: isFocused ? theme.colors.secondaryContainer : theme.colors.onSurfaceVariant
                     }} />
                 )
             case 'search': 
@@ -44,14 +44,14 @@ const CustomTabNav: React.FC<Props> = ({ state, descriptors, navigation }) => {
                         ...styles.icon,
                         width: 20,
                         height: 20,
-                        tintColor: isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant
+                        tintColor: isFocused ? theme.colors.secondaryContainer : theme.colors.onSurfaceVariant
                     }} />
                 )
             case 'notification':
                 return (
                     <Image source={ isFocused ? notificationFilledIcon : notificationIcon } style={{
                         ...styles.icon,
-                        tintColor: isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant
+                        tintColor: isFocused ? theme.colors.secondaryContainer : theme.colors.onSurfaceVariant
                     }} />
                 )
             case 'user':
@@ -60,7 +60,7 @@ const CustomTabNav: React.FC<Props> = ({ state, descriptors, navigation }) => {
                         ...styles.icon,
                         width: 21,
                         height: 21,
-                        tintColor: isFocused ? theme.colors.secondary : theme.colors.onSurfaceVariant
+                        tintColor: isFocused ? theme.colors.secondaryContainer : theme.colors.onSurfaceVariant
                     }} />
                 )
         }
@@ -117,8 +117,9 @@ const CustomTabNav: React.FC<Props> = ({ state, descriptors, navigation }) => {
                                 accessibilityRole='button'
                                 accessibilityState={ isFocused ? { selected: true } : {} }
                                 accessibilityLabel={ options.tabBarAccessibilityLabel }
-                                onPress={ onPress }
+                                onPressIn={ onPress }
                                 onLongPress={ onLongPress }
+                                activeOpacity={ .85 }
                             >
                                 <View>
                                     { getIcon(label, isFocused) }

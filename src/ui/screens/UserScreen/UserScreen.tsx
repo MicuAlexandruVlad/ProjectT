@@ -127,7 +127,7 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
 
     defaultImageFont: {
         fontFamily: 'Inter-Bold',
-        fontSize: 28,
+        fontSize: 34,
         color: theme.colors.onSecondaryFixedVariant
     },
 

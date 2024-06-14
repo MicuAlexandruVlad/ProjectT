@@ -12,6 +12,7 @@ import Routes from "../../../navigation/Routes"
 import Api from "../../../network/Api"
 import { setUser } from "../../../redux/slices/user"
 import { setJwt } from "../../../redux/slices/authTokens"
+import { setLoading } from "../../../redux/slices/uiController"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -32,7 +33,11 @@ const LoginScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
             return alert('Please fill in all fields')
         }
 
+        dispatch(setLoading(true))
+
         Api.login(email, password).then(res => {
+            dispatch(setLoading(false))
+            
             const { user, token } = res
 
             dispatch(setUser(user))
@@ -40,6 +45,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
 
             navigation.navigate(Routes.MAIN_SCREEN)
         }).catch(() => {
+            dispatch(setLoading(false))
             alert('Failed to login')
         })
     }, [email, password])

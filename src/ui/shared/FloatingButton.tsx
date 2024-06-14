@@ -20,7 +20,7 @@ const FloatingButton: React.FC<Props> = ({ onPress }): React.JSX.Element => {
     
     return (
         <TouchableOpacity onPress={ handlePress } style={ styles.container }>
-            <MaterialIcons name="post-add" size={ 20 } color={ theme.colors.onTertiary } />
+            <MaterialIcons name="post-add" size={ 20 } color={ theme.colors.onTertiaryContainer } />
         </TouchableOpacity>
     )
 }
@@ -30,7 +30,7 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
         position: "absolute",
         bottom: 24,
         right: 24,
-        backgroundColor: theme.colors.tertiary,
+        backgroundColor: theme.colors.tertiaryContainer,
         padding: 16,
         borderRadius: 100
     }

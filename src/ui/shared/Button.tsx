@@ -42,7 +42,7 @@ const Button: React.FC<Props> = ({ text, onPress, bodyStyle, textStyle, disabled
 
 const styleSheet = (theme: Theme) => StyleSheet.create({
     body: {
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.secondaryContainer,
         borderRadius: 40,
         paddingVertical: 12,
     },
@@ -50,7 +50,7 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
     font: {
         fontFamily: 'Inter-Bold',
         fontSize: 16,
-        color: theme.colors.onPrimary,
+        color: theme.colors.onSecondaryContainer,
         alignSelf: 'center',
         letterSpacing: .3
     }

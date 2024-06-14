@@ -20,4 +20,11 @@ export const dimensions = {
     TOUCHABLE_ACTIVE_OPACITY: 0.7,
 }
 
+export const getViewSwitcherOptions = () => [
+    { title: 'Posts', selected: true },
+    { title: 'Media', selected: false },
+    { title: 'Reposts', selected: false },
+    { title: 'Likes', selected: false }
+]
+
 export default constants

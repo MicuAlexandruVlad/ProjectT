@@ -1,30 +1,147 @@
 import { NavigationProp } from "@react-navigation/native"
-import React from "react"
+import React, { useCallback, useMemo, useState } from "react"
 import RootStackParamList from "../../../navigation/RootStackParamList"
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, ScrollView } from "react-native"
 import Theme from "../../../data/models/Theme"
 import ThemeUtils from "../../../utils/ThemeUtils"
 import { useSelector } from "react-redux"
+import { dimensions, getViewSwitcherOptions } from "../../../utils/Constants"
+import AppStore from "../../../data/models/AppStore"
+import Button from "../../shared/Button"
+import AsyncStorageUtils from "../../../utils/AsyncStorageUtils"
+import CustomCard from "../../shared/CustomCard"
+import HeaderButton from "../../shared/HeaderButton"
+import Routes from "../../../navigation/Routes"
+import ViewSwitcher from "./components/ViewSwitcher"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
 }
 
 const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
+    const settingsIcon = require('../../../../assets/images/settings.png')
+    
     const theme = ThemeUtils.getTheme(useSelector)
-
     const styles = styleSheet(theme)
+    
+    const user = useSelector((state: AppStore) => state.user.user)
+
+    const [viewSwitcherOptions, setViewSwitcherOptions] = useState([ ...getViewSwitcherOptions() ])
+    
+
+    const fullUserName = useMemo(() => {
+        return `${user.firstName} ${user.lastName}`
+    }, [user.firstName, user.lastName])
+
+    const imagePlaceholder = useMemo(() => {
+        return user.firstName.charAt(0).toUpperCase()
+    }, [user.firstName])
+
+    const onViewSwitcherOptionChanged = useCallback((index: number) => {
+        const newOptions = viewSwitcherOptions.map((option, i) => {
+            option.selected = i === index
+            return option
+        })
+
+        setViewSwitcherOptions(newOptions)
+    }, [])
+
+    const onSettingsPress = useCallback(() => {
+        navigation.navigate(Routes.SETTINGS_SCREEN)
+    }, [])
 
     return (
-        <View>
-            <Text>User Screen</Text>
-        </View>
+        <ScrollView contentContainerStyle={ styles.container }>
+            <HeaderButton
+                onPress={ onSettingsPress }
+                iconSource={ settingsIcon }
+            />
+            <View style={ styles.header }>
+                <View style={ styles.imageHolder }>
+                    <Text style={ styles.defaultImageFont }>{ imagePlaceholder }</Text>
+                </View>
+                <View style={{ alignItems: 'center' }}>
+                    <Text numberOfLines={ 1 }  ellipsizeMode="tail" style={ styles.fullName }>{ fullUserName }</Text>
+                    <Text numberOfLines={ 1 }  ellipsizeMode="tail" style={ styles.username }>@alex.johnathan01</Text>
+                </View>
+            </View>
+            <View style={{ marginTop: 20 }} />
+            <CustomCard>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View>
+                        <Text style={ styles.infoLabel }>Followers</Text>
+                        <Text style={ styles.infoValue }>21k</Text>
+                    </View>
+                    <View>
+                        <Text style={ styles.infoLabel }>Following</Text>
+                        <Text style={ styles.infoValue }>1.2k</Text>
+                    </View>
+                    <View>
+                        <Text style={ styles.infoLabel }>Posts</Text>
+                        <Text style={ styles.infoValue }>42</Text>
+                    </View>
+                </View>
+            </CustomCard>
+            <ViewSwitcher options={ viewSwitcherOptions } onOptionPress={ onViewSwitcherOptionChanged } />
+        </ScrollView>
     )
 }
 
 const styleSheet = (theme: Theme) => StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        padding: dimensions.MARGIN
+    },
+
+    header: {
+        marginVertical: 20,
+        alignItems: 'center'
+    },
+
+    imageHolder: {
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        backgroundColor: theme.colors.secondaryFixed,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 16
+    },
+
+    defaultImageFont: {
+        fontFamily: 'Inter-Bold',
+        fontSize: 28,
+        color: theme.colors.onSecondaryFixedVariant
+    },
+
+    fullName: {
+        fontFamily: 'Inter-Bold',
+        fontSize: 20,
+        color: theme.colors.onBackground,
+        letterSpacing: dimensions.LETTER_SPACING,
+        flexWrap: 'wrap'
+    },
+
+    username: {
+        color: theme.colors.onBackground,
+        fontFamily: 'Inter-Light',
+        fontSize: 14,
+        marginTop: 4,
+        letterSpacing: dimensions.LETTER_SPACING,
+        flexWrap: 'nowrap'
+    },
+
+    infoLabel: {
+        fontFamily: 'Inter-Medium',
+        fontSize: 16,
+        color: theme.colors.onBackground,
+        marginBottom: 4
+    },
+
+    infoValue: {
+        fontFamily: 'Inter-Bold',
+        fontSize: 16,
+        color: theme.colors.onBackground
     }
 })
 

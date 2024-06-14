@@ -20,6 +20,7 @@ type Props = {
 
 const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const settingsIcon = require('../../../../assets/images/settings.png')
+    const editIcon = require('../../../../assets/images/edit.png')
     
     const theme = ThemeUtils.getTheme(useSelector)
     const styles = styleSheet(theme)
@@ -50,6 +51,10 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
         navigation.navigate(Routes.SETTINGS_SCREEN)
     }, [])
 
+    const onEditPress = useCallback(() => {
+
+    }, [])
+
     return (
         <ScrollView contentContainerStyle={ styles.container }>
             <HeaderButton
@@ -58,6 +63,18 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
             />
             <View style={ styles.header }>
                 <View style={ styles.imageHolder }>
+                    <HeaderButton
+                        onPress={ onEditPress }
+                        iconSource={ editIcon }
+                        bodyStyle={{
+                            position: 'absolute',
+                            right: -6,
+                            top: -6,
+                            zIndex: 100,
+                            width: 30,
+                            height: 30,
+                        }}
+                    />
                     <Text style={ styles.defaultImageFont }>{ imagePlaceholder }</Text>
                 </View>
                 <View style={{ alignItems: 'center' }}>

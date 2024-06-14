@@ -21,6 +21,7 @@ export default function App() {
 	const dispatch = store.dispatch
 
 	const [inMainScreen, setInMainScreen] = useState(false)
+	const [fontsLoaded, setFontsLoaded] = useState(false)
 
 	useEffect(() => {
 		Font.loadAsync({
@@ -35,6 +36,7 @@ export default function App() {
 			'Inter-Black': require('./assets/fonts/Inter-Black.ttf')
 		}).then(() => {
 			console.log(TAG, 'Fonts loaded')
+			setFontsLoaded(true)
 		})
 	}, [])
 
@@ -93,7 +95,10 @@ export default function App() {
 				>
 					<Provider store={ store }>
 						<QueryClientProvider client={ queryClient }>
+						{
+							fontsLoaded &&
 							<AppContainer />
+						}
 						</QueryClientProvider>
 					</Provider>
 				</NavigationContainer>

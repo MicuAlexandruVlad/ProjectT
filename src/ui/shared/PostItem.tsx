@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useMemo } from "react"
 import Theme from "../../data/models/Theme"
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native"
+import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native"
 import Post from "../../data/models/Post"
 import { useSelector } from "react-redux"
 import ThemeUtils from "../../utils/ThemeUtils"
@@ -16,6 +16,11 @@ type Props = {
 }
 
 const PostItem: React.FC<Props> = ({ post, onPress, onLike, onRepost, onUserPress, disableButtons }): React.JSX.Element => {
+    const heartIcon = require('../../../assets/images/heart.png')
+    const heartFilledIcon = require('../../../assets/images/heart_filled.png')
+    const repostIcon = require('../../../assets/images/repost.png')
+    const commentIcon = require('../../../assets/images/comment.png')
+
     const theme = ThemeUtils.getTheme(useSelector)
     const styles = styleSheet(theme)
 
@@ -47,7 +52,6 @@ const PostItem: React.FC<Props> = ({ post, onPress, onLike, onRepost, onUserPres
     
     return (
         <TouchableOpacity
-            disabled={ disableButtons }
             onPress={ onPostPressed }
             activeOpacity={ .7 }
         >
@@ -70,22 +74,42 @@ const PostItem: React.FC<Props> = ({ post, onPress, onLike, onRepost, onUserPres
             <Text style={ styles.content }>{ post.content }</Text>
             <View style={ styles.engagementHolder }>
                 <TouchableOpacity
-                    disabled={ disableButtons }
                     onPress={ onLikePressed }
                     activeOpacity={ .7 }
+                    style={ styles.button }
                 >
-                    <Text style={ styles.timestamp }>{ post.engagement.likes } Likes</Text>
+                    <Image
+                        source={ heartIcon }
+                        style={ styles.icon }
+                    />
+                    <Text style={ styles.timestamp }>{ post.engagement.likes }</Text>
                 </TouchableOpacity>
                 { separator }
                 <TouchableOpacity
-                    disabled={ disableButtons }
                     onPress={ onRepostPressed }
                     activeOpacity={ .7 }
+                    style={ styles.button }
                 >
-                    <Text style={ styles.timestamp }>{ post.engagement.reposts } Reposts</Text>
+                    <Image
+                        source={ repostIcon }
+                        style={{
+                            ...styles.icon,
+                            tintColor: theme.colors.secondary
+                        }}
+                    />
+                    <Text style={ styles.timestamp }>{ post.engagement.reposts }</Text>
                 </TouchableOpacity>
                 { separator }
-                <Text style={ styles.timestamp }>{ post.engagement.comments } Comments</Text>
+                <View style={ styles.button }>
+                    <Image
+                        source={ commentIcon }
+                        style={{
+                            ...styles.icon,
+                            tintColor: theme.colors.secondary
+                        }}
+                    />
+                    <Text style={ styles.timestamp }>{ post.engagement.comments }</Text>
+                </View>
             </View>
         </TouchableOpacity>
     )
@@ -146,6 +170,20 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
         marginTop: 16,
         marginLeft: 62
     },
+
+    button: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    icon: {
+        width: 20,
+        height: 20,
+        tintColor: theme.colors.secondaryContainer,
+        marginRight: 8,
+        resizeMode: 'contain'
+    }
 })
 
 export default memo(PostItem)

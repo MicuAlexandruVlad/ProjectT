@@ -7,12 +7,12 @@ import ThemeUtils from "../../../utils/ThemeUtils"
 import { useSelector } from "react-redux"
 import { dimensions, getViewSwitcherOptions } from "../../../utils/Constants"
 import AppStore from "../../../data/models/AppStore"
-import Button from "../../shared/Button"
-import AsyncStorageUtils from "../../../utils/AsyncStorageUtils"
 import CustomCard from "../../shared/CustomCard"
 import HeaderButton from "../../shared/HeaderButton"
 import Routes from "../../../navigation/Routes"
 import ViewSwitcher from "./components/ViewSwitcher"
+import PostItem from "../../shared/PostItem"
+import { examplePost } from "../../../data/models/Post"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -54,6 +54,22 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const onEditPress = useCallback(() => {
 
     }, [])
+
+    const canDisplayPosts = useMemo(() => {
+        return viewSwitcherOptions.find(option => option.title === 'Posts')?.selected ?? false
+    }, [viewSwitcherOptions])
+
+    const canDisplayMedia = useMemo(() => {
+        return viewSwitcherOptions.find(option => option.title === 'Media')?.selected ?? false
+    }, [viewSwitcherOptions])
+
+    const canDisplayReposts = useMemo(() => {
+        return viewSwitcherOptions.find(option => option.title === 'Reposts')?.selected ?? false
+    }, [viewSwitcherOptions])
+
+    const canDisplayLikes = useMemo(() => {
+        return viewSwitcherOptions.find(option => option.title === 'Likes')?.selected ?? false
+    }, [viewSwitcherOptions])
 
     return (
         <ScrollView contentContainerStyle={ styles.container }>
@@ -100,6 +116,19 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
                 </View>
             </CustomCard>
             <ViewSwitcher options={ viewSwitcherOptions } onOptionPress={ onViewSwitcherOptionChanged } />
+            <View style={{ marginTop: 20 }} />
+            {
+                canDisplayPosts && (
+                    <PostItem
+                        post={ examplePost }
+                        onPress={ () => {} }
+                        onLike={ () => {} }
+                        onRepost={ () => {} }
+                        onUserPress={ () => {} }
+                        disableButtons
+                    />
+                )
+            }
         </ScrollView>
     )
 }

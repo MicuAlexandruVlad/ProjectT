@@ -118,16 +118,18 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
             <ViewSwitcher options={ viewSwitcherOptions } onOptionPress={ onViewSwitcherOptionChanged } />
             <View style={{ marginTop: 20 }} />
             {
-                canDisplayPosts && (
-                    <PostItem
-                        post={ examplePost }
-                        onPress={ () => {} }
-                        onLike={ () => {} }
-                        onRepost={ () => {} }
-                        onUserPress={ () => {} }
-                        disableButtons
-                    />
-                )
+                canDisplayPosts && Array.from({ length: 8 }).map((_, index) => (
+                    <View key={ index } style={{ marginTop: index > 0 ? 16 : 0 }}>
+                        <PostItem
+                            post={ examplePost }
+                            onPress={ () => {} }
+                            onLike={ () => {} }
+                            onRepost={ () => {} }
+                            onUserPress={ () => {} }
+                            disableButtons
+                        />
+                    </View>
+                ))
             }
         </ScrollView>
     )
@@ -135,7 +137,6 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
 
 const styleSheet = (theme: Theme) => StyleSheet.create({
     container: {
-        flex: 1,
         padding: dimensions.MARGIN
     },
 

@@ -4,7 +4,7 @@ import User, { UnregisteredUser } from "../data/models/User"
 
 const TAG = 'Api:'
 export default class Api {
-    private static DEV_URL = 'http://192.168.0.199:3000'
+    private static DEV_URL = 'http://192.168.0.200:3000'
     private static BASE_URL = this.DEV_URL
     private static REGISTER = `${this.BASE_URL}/user/register`
     private static LOGIN = `${this.BASE_URL}/user/login`

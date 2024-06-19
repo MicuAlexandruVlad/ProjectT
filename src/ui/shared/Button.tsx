@@ -44,7 +44,7 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
     body: {
         backgroundColor: theme.colors.secondaryContainer,
         borderRadius: 40,
-        paddingVertical: 12,
+        paddingVertical: 8,
     },
 
     font: {

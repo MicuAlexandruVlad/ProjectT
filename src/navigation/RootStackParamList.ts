@@ -5,6 +5,7 @@ type RootStackParamList = {
     RegisterScreen: undefined
     MainScreen: undefined
     SettingsScreen: undefined
+    EditScreen: undefined
 }
 
 export default RootStackParamList

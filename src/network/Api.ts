@@ -59,4 +59,21 @@ export default class Api {
             })
         })
     }
+
+    static async updateUser (user: User, jwt: string) {
+        return new Promise<void>((resolve, reject) => {
+            axios.post(this.UPDATE_PROFILE, user, {
+                headers: { Authorization: `Bearer ${jwt}` },
+                timeout: constants.API_TIMEOUT
+            }).then(response => {
+                console.log(TAG, 'updateUser: response ->', response)
+                
+                resolve()
+            }).catch(error => {
+                console.log(TAG, 'updateUser: error ->', error)
+                
+                reject(error)
+            })
+        })
+    }
 }

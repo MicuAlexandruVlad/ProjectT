@@ -8,6 +8,7 @@ import LoginScreen from '../ui/screens/LoginScreen/LoginScreen'
 import RegisterScreen from '../ui/screens/RegisterScreen/RegisterScreen'
 import MainScreen from '../ui/screens/MainScreen/MainScreen'
 import SettingsScreen from '../ui/screens/SettingsScreen/SettingsScreen'
+import EditProfileScreen from '../ui/screens/EditProfileScreen/EditProfileScreen'
 
 
 const Stack = createStackNavigator()
@@ -58,6 +59,14 @@ const StackNav = () => {
                 component={ SettingsScreen }
                 options={{
                     title: 'Settings',
+                    headerShown: false
+                }}
+                />
+            <Stack.Screen
+                name={ Routes.EDIT_SCREEN }
+                component={ EditProfileScreen }
+                options={{
+                    title: 'Edit Profile',
                     headerShown: false
                 }}
                 />

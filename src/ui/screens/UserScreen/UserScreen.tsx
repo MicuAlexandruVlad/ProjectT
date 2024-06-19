@@ -1,5 +1,5 @@
 import { NavigationProp } from "@react-navigation/native"
-import React, { useCallback, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import RootStackParamList from "../../../navigation/RootStackParamList"
 import { View, Text, StyleSheet, ScrollView } from "react-native"
 import Theme from "../../../data/models/Theme"
@@ -28,7 +28,6 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const user = useSelector((state: AppStore) => state.user.user)
 
     const [viewSwitcherOptions, setViewSwitcherOptions] = useState([ ...getViewSwitcherOptions() ])
-    
 
     const fullUserName = useMemo(() => {
         return `${user.firstName} ${user.lastName}`
@@ -52,7 +51,7 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     }, [])
 
     const onEditPress = useCallback(() => {
-
+        navigation.navigate(Routes.EDIT_SCREEN)
     }, [])
 
     const canDisplayPosts = useMemo(() => {

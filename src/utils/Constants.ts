@@ -18,6 +18,7 @@ export const dimensions = {
     BORDER_RADIUS: 40,
     LETTER_SPACING: 0.5,
     TOUCHABLE_ACTIVE_OPACITY: 0.7,
+    LINE_HEIGHT: 24
 }
 
 export const getViewSwitcherOptions = () => [

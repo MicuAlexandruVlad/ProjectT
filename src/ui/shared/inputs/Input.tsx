@@ -130,6 +130,7 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
         opacity: 1,
         flex: 1,
         letterSpacing: dimensions.LETTER_SPACING,
+        lineHeight: dimensions.LINE_HEIGHT,
         paddingHorizontal: 16,
         paddingVertical: 12,
     },

@@ -1,7 +1,7 @@
 export interface PostUser {
     username: string
     displayName: string
-    userId: string
+    userId: number
     profilePictureUrl?: string
 }
   
@@ -17,18 +17,22 @@ export interface Engagement {
     comments: number
 }
 
-export default interface Post {
-    id: number
-    user: PostUser
+export interface UnuploadedPost {
+    user: { userId: number }
     content: string
     media?: Media
     metadata: {
-        timestamp: Date
+        timestamp: number
         location?: string
     }
-    engagement: Engagement
     hashtags?: string[]
     mentions?: string[]
+}
+
+export interface Post extends UnuploadedPost {
+    id: number
+    engagement: Engagement
+    user: PostUser
 }
 
 export const examplePost: Post = {
@@ -36,7 +40,7 @@ export const examplePost: Post = {
     user: {
         username: 'alex.johnathan01',
         displayName: 'Alex Johnathan',
-        userId: '00123',
+        userId: 4,
     },
     content: 'I love how all people on the internet always get pissed for no reason over the most ridiculous shit ever',
     media: {
@@ -45,7 +49,7 @@ export const examplePost: Post = {
         // linkUrl can be included if there's a link in the content
     },
     metadata: {
-        timestamp: new Date(),
+        timestamp: new Date().getTime(),
         location: 'Constanța, Romania', // Optional
     },
     engagement: {

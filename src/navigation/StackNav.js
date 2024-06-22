@@ -9,6 +9,7 @@ import RegisterScreen from '../ui/screens/RegisterScreen/RegisterScreen'
 import MainScreen from '../ui/screens/MainScreen/MainScreen'
 import SettingsScreen from '../ui/screens/SettingsScreen/SettingsScreen'
 import EditProfileScreen from '../ui/screens/EditProfileScreen/EditProfileScreen'
+import CreatePostScreen from '../ui/screens/CreatePostScreen/CreatePostScreen'
 
 
 const Stack = createStackNavigator()
@@ -67,6 +68,14 @@ const StackNav = () => {
                 component={ EditProfileScreen }
                 options={{
                     title: 'Edit Profile',
+                    headerShown: false
+                }}
+                />
+            <Stack.Screen
+                name={ Routes.CREATE_POST_SCREEN }
+                component={ CreatePostScreen }
+                options={{
+                    title: 'Create Post',
                     headerShown: false
                 }}
                 />

@@ -6,6 +6,7 @@ import Theme from "../../../data/models/Theme"
 import ThemeUtils from "../../../utils/ThemeUtils"
 import { useSelector } from "react-redux"
 import FloatingButton from "../../shared/FloatingButton"
+import Routes from "../../../navigation/Routes"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -16,7 +17,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
 
     const styles = styleSheet(theme)
 
-    const onNewPost = React.useCallback(() => {}, [])
+    const onNewPost = React.useCallback(() => {
+        navigation.navigate(Routes.CREATE_POST_SCREEN)
+    }, [])
 
     return (
         <View style={ styles.container }>

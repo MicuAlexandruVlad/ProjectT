@@ -1,6 +1,7 @@
 import axios from "axios"
 import constants from "../utils/Constants"
 import User, { UnregisteredUser } from "../data/models/User"
+import { Post, UnuploadedPost } from "../data/models/Post"
 
 const TAG = 'Api:'
 export default class Api {
@@ -10,6 +11,7 @@ export default class Api {
     private static LOGIN = `${this.BASE_URL}/user/login`
     private static COMPLETE_PROFILE = `${this.BASE_URL}/user/complete-profile`
     private static UPDATE_PROFILE = `${this.BASE_URL}/user/update-profile`
+    private static CREATE_POST = `${this.BASE_URL}/post/create`
 
     static async register(user: UnregisteredUser): Promise<User> {
         return new Promise((resolve, reject) => {
@@ -71,6 +73,23 @@ export default class Api {
                 resolve()
             }).catch(error => {
                 console.log(TAG, 'updateUser: error ->', error)
+                
+                reject(error)
+            })
+        })
+    }
+
+    static async createPost(unuploadedPost: UnuploadedPost, jwt: string) {
+        return new Promise<Post>((resolve, reject) => {
+            axios.post(this.CREATE_POST, unuploadedPost, {
+                headers: { Authorization: `Bearer ${jwt}` },
+                timeout: constants.API_TIMEOUT
+            }).then(response => {
+                console.log(TAG, 'createPost: response ->', response)
+                
+                resolve(response.data)
+            }).catch(error => {
+                console.log(TAG, 'createPost: error ->', error)
                 
                 reject(error)
             })

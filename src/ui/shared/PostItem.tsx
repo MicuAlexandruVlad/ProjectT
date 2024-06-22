@@ -1,17 +1,17 @@
 import React, { memo, useCallback, useMemo } from "react"
 import Theme from "../../data/models/Theme"
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native"
-import Post from "../../data/models/Post"
 import { useSelector } from "react-redux"
 import ThemeUtils from "../../utils/ThemeUtils"
 import user from "../../redux/slices/user"
+import { Post } from "../../data/models/Post"
 
 type Props = {
     post: Post
     onPress: (id: number) => void
     onLike: (id: number) => void
     onRepost: (id: number) => void
-    onUserPress: (userId: string) => void
+    onUserPress: (userId: number) => void
     disableButtons?: boolean
 }
 
@@ -159,7 +159,7 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
         fontFamily: 'Inter-Regular',
         fontSize: 16,
         color: theme.colors.onBackground,
-        marginLeft: 62,
+        // marginLeft: 62,
         flexWrap: 'wrap'
     },
 
@@ -168,7 +168,7 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: 16,
-        marginLeft: 62
+        // marginLeft: 62
     },
 
     button: {

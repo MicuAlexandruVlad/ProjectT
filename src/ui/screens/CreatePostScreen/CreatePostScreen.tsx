@@ -42,15 +42,12 @@ const CreatePostScreen: React.FC<Props> = ({ navigation }): React.JSX.Element =>
 
         const post: UnuploadedPost = {
             content: postText,
-            metadata: {
-                timestamp: new Date().getTime(),
-            },
-            user: {
-                userId: user.id,
-            },
+            metadata: {},
+            userId: user.id,
             hashtags: [],
             mentions: [],
-            media: {}
+            media: {},
+            timestamp: new Date().getTime(),
         }
 
         Api.createPost(post, jwt).then((post: Post) => {

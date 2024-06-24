@@ -35,8 +35,8 @@ const PostItem: React.FC<Props> = ({ post, onPress, onLike, onRepost, onUserPres
     }, [])
 
     const onUserPressed = useCallback(() => {
-        onUserPress(post.user.userId)
-    }, [post.user.userId])
+        onUserPress(post.userId)
+    }, [post.userId])
 
     const onPostPressed = useCallback(() => {
         onPress(post.id)

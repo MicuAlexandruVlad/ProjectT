@@ -2,6 +2,8 @@ import axios from "axios"
 import constants from "../utils/Constants"
 import User, { UnregisteredUser } from "../data/models/User"
 import { Post, UnuploadedPost } from "../data/models/Post"
+import UserPostsResponse from "../data/models/api/UserPostsResponse"
+import APIObjectParser from "../utils/APIObjectParser"
 
 const TAG = 'Api:'
 export default class Api {
@@ -12,6 +14,7 @@ export default class Api {
     private static COMPLETE_PROFILE = `${this.BASE_URL}/user/complete-profile`
     private static UPDATE_PROFILE = `${this.BASE_URL}/user/update-profile`
     private static CREATE_POST = `${this.BASE_URL}/post/create`
+    private static GET_USER_POSTS = `${this.BASE_URL}/post/get-user-posts`
 
     static async register(user: UnregisteredUser): Promise<User> {
         return new Promise((resolve, reject) => {
@@ -23,7 +26,8 @@ export default class Api {
                     id: data.id,
                     firstName: data.firstName,
                     lastName: data.lastName,
-                    email: data.email
+                    email: data.email,
+                    username: data.username
                 }
 
                 console.log(TAG, 'register: response ->', response)
@@ -47,7 +51,8 @@ export default class Api {
                     id: data.user.id,
                     firstName: data.user.firstName,
                     lastName: data.user.lastName,
-                    email: data.user.email
+                    email: data.user.email,
+                    username: data.user.username
                 }
                 
                 resolve({
@@ -90,6 +95,22 @@ export default class Api {
                 resolve(response.data)
             }).catch(error => {
                 console.log(TAG, 'createPost: error ->', error)
+                
+                reject(error)
+            })
+        })
+    }
+
+    static async getUserPosts(userId: string) {
+        return new Promise<Post[]>((resolve, reject) => {
+            axios.get<UserPostsResponse>(`${this.GET_USER_POSTS}?userId=${userId}`, {
+                timeout: constants.API_TIMEOUT
+            }).then(response => {
+                console.log(TAG, 'getUserPosts: response ->', response)
+
+                resolve(APIObjectParser.userPostResponseToPost(response.data))
+            }).catch(error => {
+                console.log(TAG, 'getUserPosts: error ->', error)
                 
                 reject(error)
             })

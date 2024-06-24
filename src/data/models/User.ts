@@ -4,6 +4,7 @@ export default interface User {
     firstName: string
     lastName: string
     email: string
+    username: string
 }
 
 export interface UnregisteredUser {
@@ -11,4 +12,5 @@ export interface UnregisteredUser {
     password: string
     firstName: string
     lastName: string
+    username: string
 }

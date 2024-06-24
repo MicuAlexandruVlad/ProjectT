@@ -26,13 +26,14 @@ const RegisterScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const [confirmPassword, setConfirmPassword] = React.useState<string>('')
     const [firstName, setFirstName] = React.useState<string>('')
     const [lastName, setLastName] = React.useState<string>('')
+    const [username, setUsername] = React.useState<string>('')
 
     const onSignUp = () => {
         if (password !== confirmPassword) {
             return alert('Passwords do not match')
         }
 
-        if (!email || !password || !confirmPassword || !firstName || !lastName) {
+        if (!email || !password || !confirmPassword || !firstName || !lastName || !username) {
             return alert('Please fill in all fields')
         }
 
@@ -40,7 +41,8 @@ const RegisterScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
             email,
             password,
             firstName,
-            lastName
+            lastName,
+            username
         }
 
         Api.register(user).then(() => {
@@ -97,6 +99,13 @@ const RegisterScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
                     placeholder='Enter your last name'
                     value={ lastName }
                     onChange={ setLastName }
+                />
+                <View style={{ marginTop: 20 }} />
+                <Input
+                    label='Username'
+                    placeholder='Enter your username'
+                    value={ username }
+                    onChange={ setUsername }
                 />
                 <View style={{ marginTop: 60 }} />
                 <View style={{ marginTop: 'auto' }}>

@@ -37,12 +37,14 @@ const RegisterScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
             return alert('Please fill in all fields')
         }
 
+        const fixedUsername = username.replace(/[@\s]/g, "")
+
         const user: UnregisteredUser = {
-            email,
+            email: email.trim(),
             password,
-            firstName,
-            lastName,
-            username
+            firstName: firstName.trim(),
+            lastName: lastName.trim(),
+            username: fixedUsername
         }
 
         Api.register(user).then(() => {

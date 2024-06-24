@@ -35,7 +35,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
 
         dispatch(setLoading(true))
 
-        Api.login(email, password).then(res => {
+        Api.login(email.trim(), password).then(res => {
             dispatch(setLoading(false))
             
             const { user, token } = res

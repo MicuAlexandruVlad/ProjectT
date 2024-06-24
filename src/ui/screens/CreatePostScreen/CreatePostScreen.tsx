@@ -47,7 +47,7 @@ const CreatePostScreen: React.FC<Props> = ({ navigation }): React.JSX.Element =>
             hashtags: [],
             mentions: [],
             media: {},
-            timestamp: new Date().getTime(),
+            createdAt: new Date().getTime(),
         }
 
         Api.createPost(post, jwt).then((post: Post) => {

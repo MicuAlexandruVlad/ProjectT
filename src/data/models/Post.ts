@@ -25,7 +25,7 @@ export interface UnuploadedPost {
     }
     hashtags?: string[]
     mentions?: string[]
-    timestamp: number
+    createdAt: number
 }
 
 export interface Post extends UnuploadedPost {
@@ -55,7 +55,7 @@ export const examplePost: Post = {
         likes: 100,
         comments: 5,
     },
-    timestamp: new Date().getTime(),
+    createdAt: new Date().getTime(),
     hashtags: ['#example', '#typescript'],
     mentions: ['@anotheruser'],
 }

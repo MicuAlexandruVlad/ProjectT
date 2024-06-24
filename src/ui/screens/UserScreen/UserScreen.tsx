@@ -94,7 +94,7 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
                 </View>
                 <View style={{ alignItems: 'center' }}>
                     <Text numberOfLines={ 1 }  ellipsizeMode="tail" style={ styles.fullName }>{ fullUserName }</Text>
-                    <Text numberOfLines={ 1 }  ellipsizeMode="tail" style={ styles.username }>@alex.johnathan01</Text>
+                    <Text numberOfLines={ 1 }  ellipsizeMode="tail" style={ styles.username }>@{ user.username }</Text>
                 </View>
             </View>
             <View style={{ marginTop: 20 }} />

@@ -11,11 +11,14 @@ import Routes from '../../../navigation/Routes'
 import AsyncStorageUtils from '../../../utils/AsyncStorageUtils'
 import { setJwt } from '../../../redux/slices/authTokens'
 import { setUser } from '../../../redux/slices/user'
+import Api from '../../../network/Api'
+import { setPosts } from '../../../redux/slices/posts'
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
 }
 
+const TAG = 'SplashScreen:'
 const SplashScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const theme = ThemeUtils.getTheme(useSelector)
 
@@ -36,6 +39,10 @@ const SplashScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
         if (user && token) {
             dispatch(setUser(user))
             dispatch(setJwt(token))
+
+            Api.getUserPosts(user.id, token).then(posts => {
+                dispatch(setPosts(posts))
+            })
         
             navigation.reset({
                 index: 0,

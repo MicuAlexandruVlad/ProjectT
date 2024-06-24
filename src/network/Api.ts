@@ -101,10 +101,11 @@ export default class Api {
         })
     }
 
-    static async getUserPosts(userId: string) {
+    static async getUserPosts(userId: number, jwt: string) {
         return new Promise<Post[]>((resolve, reject) => {
             axios.get<UserPostsResponse>(`${this.GET_USER_POSTS}?userId=${userId}`, {
-                timeout: constants.API_TIMEOUT
+                timeout: constants.API_TIMEOUT,
+                headers: { Authorization: `Bearer ${jwt}` }
             }).then(response => {
                 console.log(TAG, 'getUserPosts: response ->', response)
 

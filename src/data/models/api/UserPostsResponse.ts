@@ -1,3 +1,5 @@
+import { PostUser } from "../Post"
+
 export default interface UserPostsResponse {
     message: string
     posts: Post[]
@@ -6,15 +8,18 @@ export default interface UserPostsResponse {
 interface Post {
     keys: string[]
     length: number
-    _fields: Field[]
+    _fields: [PostField, PostUser]
     _fieldLookup: FieldLookup
 }
 
 interface Field {
     identity: Identity
     labels: string[]
-    properties: Properties
     elementId: string
+}
+
+export interface PostField extends Field {
+    properties: PostProperties
 }
 
 interface Identity {
@@ -22,7 +27,7 @@ interface Identity {
     high: number
 }
 
-interface Properties {
+interface PostProperties {
     metadata: string
     engagement: string
     hashtags: any[]
@@ -30,8 +35,7 @@ interface Properties {
     media: string
     userId: number
     content: string
-    user: string
-    timestamp: number
+    createdAt: number
 }
 
 interface FieldLookup {

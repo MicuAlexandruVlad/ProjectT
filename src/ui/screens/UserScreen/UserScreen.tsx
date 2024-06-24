@@ -18,6 +18,7 @@ type Props = {
     navigation: NavigationProp<RootStackParamList>
 }
 
+const TAG = 'UserScreen:'
 const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const settingsIcon = require('../../../../assets/images/settings.png')
     const editIcon = require('../../../../assets/images/edit.png')
@@ -26,6 +27,9 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const styles = styleSheet(theme)
     
     const user = useSelector((state: AppStore) => state.user.user)
+    const posts = useSelector((state: AppStore) => state.posts.posts)
+
+    console.log(TAG, 'posts ->', posts)
 
     const [viewSwitcherOptions, setViewSwitcherOptions] = useState([ ...getViewSwitcherOptions() ])
 
@@ -117,10 +121,10 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
             <ViewSwitcher options={ viewSwitcherOptions } onOptionPress={ onViewSwitcherOptionChanged } />
             <View style={{ marginTop: 20 }} />
             {
-                canDisplayPosts && Array.from({ length: 8 }).map((_, index) => (
+                canDisplayPosts && posts.map((post, index) => (
                     <View key={ index } style={{ marginTop: index > 0 ? 16 : 0 }}>
                         <PostItem
-                            post={ examplePost }
+                            post={ post }
                             onPress={ () => {} }
                             onLike={ () => {} }
                             onRepost={ () => {} }

@@ -13,6 +13,7 @@ import Routes from "../../../navigation/Routes"
 import ViewSwitcher from "./components/ViewSwitcher"
 import PostItem from "../../shared/PostItem"
 import { examplePost } from "../../../data/models/Post"
+import PostsFragment from "./fragments/PostsFragment"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -27,9 +28,7 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const styles = styleSheet(theme)
     
     const user = useSelector((state: AppStore) => state.user.user)
-    const posts = useSelector((state: AppStore) => state.posts.posts)
-
-    console.log(TAG, 'posts ->', posts)
+    const posts = useSelector((state: AppStore) => state.posts.userProfilePosts)
 
     const [viewSwitcherOptions, setViewSwitcherOptions] = useState([ ...getViewSwitcherOptions() ])
 
@@ -121,18 +120,7 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
             <ViewSwitcher options={ viewSwitcherOptions } onOptionPress={ onViewSwitcherOptionChanged } />
             <View style={{ marginTop: 20 }} />
             {
-                canDisplayPosts && posts.map((post, index) => (
-                    <View key={ index } style={{ marginTop: index > 0 ? 16 : 0 }}>
-                        <PostItem
-                            post={ post }
-                            onPress={ () => {} }
-                            onLike={ () => {} }
-                            onRepost={ () => {} }
-                            onUserPress={ () => {} }
-                            disableButtons
-                        />
-                    </View>
-                ))
+                canDisplayPosts && <PostsFragment />
             }
         </ScrollView>
     )

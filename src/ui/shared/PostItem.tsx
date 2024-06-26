@@ -186,4 +186,6 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
     }
 })
 
-export default memo(PostItem)
+export default memo(PostItem, (prev, next) => {
+    return JSON.stringify(prev.post) === JSON.stringify(next.post)
+})

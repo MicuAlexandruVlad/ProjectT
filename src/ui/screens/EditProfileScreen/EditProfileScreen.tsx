@@ -34,7 +34,11 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }): React.JSX.Element =
 
     const onSave = useCallback(() => {
         const oldUser = { ...user }
-        const updatedUser = { ...user, firstName, lastName }
+        const updatedUser = {
+            ...user,
+            firstName: firstName.trim(),
+            lastName: lastName.trim(),
+        }
         const areUsersEqual = JSON.stringify(user) === JSON.stringify(updatedUser)
 
         if (areUsersEqual) {
@@ -66,6 +70,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }): React.JSX.Element =
                 label='First Name'
                 placeholder='Enter your first name'
                 value={ firstName }
+                capitalizeWords
                 onChange={ setFirstName }
             />
             <View style={{ marginTop: 20 }} />
@@ -73,6 +78,7 @@ const EditProfileScreen: React.FC<Props> = ({ navigation }): React.JSX.Element =
                 label='Last Name'
                 placeholder='Enter your last name'
                 value={ lastName }
+                capitalizeWords
                 onChange={ setLastName }
             />
             <View style={{ marginTop: 'auto' }}>

@@ -93,6 +93,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
                     label='First Name'
                     placeholder='Enter your first name'
                     value={ firstName }
+                    capitalizeWords
                     onChange={ setFirstName }
                 />
                 <View style={{ marginTop: 20 }} />
@@ -100,6 +101,7 @@ const RegisterScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
                     label='Last Name'
                     placeholder='Enter your last name'
                     value={ lastName }
+                    capitalizeWords
                     onChange={ setLastName }
                 />
                 <View style={{ marginTop: 20 }} />

@@ -41,7 +41,7 @@ const CreatePostScreen: React.FC<Props> = ({ navigation }): React.JSX.Element =>
         dispatch(setLoading(true))
 
         const post: UnuploadedPost = {
-            content: postText,
+            content: postText.trim(),
             metadata: {},
             userId: user.id,
             hashtags: [],
@@ -72,6 +72,7 @@ const CreatePostScreen: React.FC<Props> = ({ navigation }): React.JSX.Element =>
                 multiLine
                 numberOfLines={ 5 }
                 noLabel
+                capitalizeSentences
                 inputHolderStyle={{ borderRadius: 16 }}
                 bodyStyle={{ maxHeight: dimensions.HEIGHT / 2.4 }}
             />

@@ -26,9 +26,10 @@ const styleSheet = (theme: Theme) => StyleSheet.create({
     },
 
     title: {
-        fontSize: 30,
-        fontFamily: 'Inter-Light',
+        fontSize: 20,
+        fontFamily: 'Inter-Bold',
         letterSpacing: dimensions.LETTER_SPACING + 1,
+        lineHeight: dimensions.LINE_HEIGHT,
         color: theme.colors.onBackground,
         marginBottom: 40
     },

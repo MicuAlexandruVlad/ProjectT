@@ -21,6 +21,11 @@ export const dimensions = {
     LINE_HEIGHT: 24
 }
 
+export const placeholders = {
+    NO_USERS_FOLLOWED_TITLE: 'Get Started by Following Users!',
+    NO_USERS_FOLLOWED_SUBTITLE: "Looks like you're new here! Start exploring by following some users to see their latest posts.",
+}
+
 export const getViewSwitcherOptions = () => [
     { title: 'Posts', selected: true },
     { title: 'Media', selected: false },

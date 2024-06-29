@@ -27,7 +27,10 @@ export default class Api {
                     firstName: data.firstName,
                     lastName: data.lastName,
                     email: data.email,
-                    username: data.username
+                    username: data.username,
+                    followers: 0,
+                    following: 0,
+                    posts: 0
                 }
 
                 console.log(TAG, 'register: response ->', response)
@@ -52,7 +55,10 @@ export default class Api {
                     firstName: data.user.firstName,
                     lastName: data.user.lastName,
                     email: data.user.email,
-                    username: data.user.username
+                    username: data.user.username,
+                    followers: data.user.followers,
+                    following: data.user.following,
+                    posts: data.user.posts
                 }
                 
                 resolve({

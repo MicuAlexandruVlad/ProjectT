@@ -5,6 +5,9 @@ export default interface User {
     lastName: string
     email: string
     username: string
+    followers: number
+    following: number
+    posts: number
 }
 
 export interface UnregisteredUser {

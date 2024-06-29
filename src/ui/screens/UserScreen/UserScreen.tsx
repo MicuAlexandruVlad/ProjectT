@@ -105,15 +105,15 @@ const UserScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View>
                         <Text style={ styles.infoLabel }>Followers</Text>
-                        <Text style={ styles.infoValue }>21k</Text>
+                        <Text style={ styles.infoValue }>{ user.followers }</Text>
                     </View>
                     <View>
                         <Text style={ styles.infoLabel }>Following</Text>
-                        <Text style={ styles.infoValue }>1.2k</Text>
+                        <Text style={ styles.infoValue }>{ user.following }</Text>
                     </View>
                     <View>
                         <Text style={ styles.infoLabel }>Posts</Text>
-                        <Text style={ styles.infoValue }>42</Text>
+                        <Text style={ styles.infoValue }>{ user.posts }</Text>
                     </View>
                 </View>
             </CustomCard>

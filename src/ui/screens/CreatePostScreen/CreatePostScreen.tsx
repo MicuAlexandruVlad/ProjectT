@@ -14,6 +14,8 @@ import User from "../../../data/models/User"
 import { Post, UnuploadedPost } from "../../../data/models/Post"
 import Api from "../../../network/Api"
 import { setLoading } from "../../../redux/slices/uiController"
+import { insertUserProfilePost } from "../../../redux/slices/posts"
+import { setUser } from "../../../redux/slices/user"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -50,11 +52,21 @@ const CreatePostScreen: React.FC<Props> = ({ navigation }): React.JSX.Element =>
             createdAt: new Date().getTime(),
         }
 
-        Api.createPost(post, jwt).then((post: Post) => {
+        Api.createPost(post, jwt, user).then((post: Post) => {
             dispatch(setLoading(false))
+            dispatch(insertUserProfilePost(post))
+
+            const updatedUser: User = {
+                ...user,
+                posts: user.posts + 1
+            }
+
+            dispatch(setUser(updatedUser))
+            
             navigation.goBack()
         }).catch((error: any) => {
             dispatch(setLoading(false))
+            alert('Error creating post')
             console.log(TAG, 'Error creating post:', error)
         })
     }, [postText, user])

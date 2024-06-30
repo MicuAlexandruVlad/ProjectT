@@ -26,12 +26,19 @@ export const postsSlice = createSlice({
             state.userProfilePosts = action.payload
         },
 
+        insertUserProfilePost: (state, action: PayloadAction<Post>) => {
+            state.userProfilePosts = [
+                action.payload,
+                ...state.userProfilePosts
+            ]
+        },
+
         setUserProfilePostsRetrieved: (state, action: PayloadAction<boolean>) => {
             state.userProfilePostsRetrieved = action.payload
         }
     }
 })
 
-export const { setUserProfilePosts, setUserProfilePostsRetrieved } = postsSlice.actions
+export const { setUserProfilePosts, insertUserProfilePost, setUserProfilePostsRetrieved } = postsSlice.actions
 
 export default postsSlice.reducer

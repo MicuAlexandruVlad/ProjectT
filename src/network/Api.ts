@@ -90,7 +90,7 @@ export default class Api {
         })
     }
 
-    static async createPost(unuploadedPost: UnuploadedPost, jwt: string) {
+    static async createPost(unuploadedPost: UnuploadedPost, jwt: string, user: User) {
         return new Promise<Post>((resolve, reject) => {
             axios.post(this.CREATE_POST, unuploadedPost, {
                 headers: { Authorization: `Bearer ${jwt}` },
@@ -98,7 +98,24 @@ export default class Api {
             }).then(response => {
                 console.log(TAG, 'createPost: response ->', response)
                 
-                resolve(response.data)
+                const post: Post = {
+                    id: response.data.post._fields[0].identity.low,
+                    userId: response.data.post._fields[0].properties.userId,
+                    content: response.data.post._fields[0].properties.content,
+                    engagement: JSON.parse(response.data.post._fields[0].properties.engagement),
+                    metadata: JSON.parse(response.data.post._fields[0].properties.metadata),
+                    user: {
+                        displayName: user.firstName + ' ' + user.lastName,
+                        username: user.username,
+                        profilePictureUrl: ''
+                    },
+                    hashtags: response.data.post._fields[0].properties.hashtags,
+                    media: JSON.parse(response.data.post._fields[0].properties.media),
+                    mentions: response.data.post._fields[0].properties.mentions,
+                    createdAt: response.data.post._fields[0].properties.createdAt
+                }
+
+                resolve(post)
             }).catch(error => {
                 console.log(TAG, 'createPost: error ->', error)
                 

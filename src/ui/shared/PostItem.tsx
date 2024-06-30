@@ -49,6 +49,29 @@ const PostItem: React.FC<Props> = ({ post, onPress, onLike, onRepost, onUserPres
     const onRepostPressed = useCallback(() => {
         onRepost(post.id)
     }, [post.id])
+
+    const formattedDate = useMemo(() => {
+        const now = new Date().getTime()
+        const postDate = new Date(post.createdAt).getTime()
+        const diff = now - postDate // Difference in milliseconds
+    
+        const seconds = Math.floor(diff / 1000)
+        const minutes = Math.floor(diff / 60000)
+        const hours = Math.floor(diff / 3600000)
+        const days = Math.floor(diff / 86400000)
+    
+        if (seconds < 60) {
+            return seconds === 0 ? 'now' : `${seconds}s`
+        } else if (minutes < 60) {
+            return `${minutes}m`
+        } else if (hours < 24) {
+            return `${hours}h`
+        } else if (days < 365) {
+            return new Date(postDate).toLocaleDateString('en-US', { day: '2-digit', month: 'short' })
+        } else {
+            return new Date(postDate).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })
+        }
+    }, [post.createdAt])
     
     return (
         <TouchableOpacity
@@ -69,7 +92,7 @@ const PostItem: React.FC<Props> = ({ post, onPress, onLike, onRepost, onUserPres
                     <Text ellipsizeMode="tail" numberOfLines={ 1 } style={ styles.username }>{ `@${ post.user.username }` }</Text>
                 </View>
                 { separator }
-                <Text style={ styles.timestamp }>16h</Text>
+                <Text style={ styles.timestamp }>{ formattedDate }</Text>
             </View>
             <Text style={ styles.content }>{ post.content }</Text>
             <View style={ styles.engagementHolder }>

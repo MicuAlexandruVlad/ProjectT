@@ -50,8 +50,8 @@ const RegisterScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
         Api.register(user).then(() => {
             alert('Successfully registered')
             navigation.goBack()
-        }).catch(() => {
-            alert('Failed to register')
+        }).catch(err => {
+            alert(err.response.data.message)
         })
     }
 

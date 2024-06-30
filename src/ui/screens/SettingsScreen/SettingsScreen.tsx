@@ -3,11 +3,12 @@ import React, { useCallback } from "react"
 import RootStackParamList from "../../../navigation/RootStackParamList"
 import { View, Text, StyleSheet } from "react-native"
 import Theme from "../../../data/models/Theme"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import ThemeUtils from "../../../utils/ThemeUtils"
 import Button from "../../shared/Button"
 import AsyncStorageUtils from "../../../utils/AsyncStorageUtils"
 import { dimensions } from "../../../utils/Constants"
+import { setUserProfilePosts, setUserProfilePostsRetrieved } from "../../../redux/slices/posts"
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -18,9 +19,14 @@ const SettingsScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
 
     const styles = styleSheet(theme)
 
+    const dispatch = useDispatch()
+
     const onLogout = useCallback(() => {
         AsyncStorageUtils.removeActiveUser()
         AsyncStorageUtils.removeApiToken()
+
+        dispatch(setUserProfilePosts([]))
+        dispatch(setUserProfilePostsRetrieved(false))
         
         navigation.reset({
             index: 0,

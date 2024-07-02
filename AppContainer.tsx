@@ -7,6 +7,7 @@ import AppStore from "./src/data/models/AppStore"
 import UIController from "./src/data/models/UIController"
 import Loader from "./src/ui/shared/Loader"
 import StackNav from "./src/navigation/StackNav"
+import { dimensions } from "./src/utils/Constants"
 
 
 const AppContainer: React.FC = (): React.JSX.Element => {
@@ -23,7 +24,7 @@ const AppContainer: React.FC = (): React.JSX.Element => {
 		<View style={{ 
 			backgroundColor: theme.colors.background,
 			flexGrow: 1,
-			height: '100%',
+			height: dimensions.HEIGHT,
 		}}>
 			<StatusBar backgroundColor={ theme.colors.background } barStyle={ isDarkTheme ? 'light-content' : 'dark-content' } />
 			<StackNav />

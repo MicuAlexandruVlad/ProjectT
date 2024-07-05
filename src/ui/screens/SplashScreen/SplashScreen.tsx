@@ -11,6 +11,7 @@ import Routes from '../../../navigation/Routes'
 import AsyncStorageUtils from '../../../utils/AsyncStorageUtils'
 import { setJwt } from '../../../redux/slices/authTokens'
 import { setUser } from '../../../redux/slices/user'
+import { setRecentSearchedUsers, setRecentSearches } from '../../../redux/slices/search'
 
 type Props = {
     navigation: NavigationProp<RootStackParamList>
@@ -33,10 +34,15 @@ const SplashScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     const startupLogic = async () => {
         const user = await AsyncStorageUtils.getActiveUser()
         const token = await AsyncStorageUtils.getApiToken()
+        const recentSearchedUsers = await AsyncStorageUtils.getRecentSearchedUsers()
+        const recentSearches = await AsyncStorageUtils.getRecentSearches()
 
         if (user && token) {
             dispatch(setUser(user))
             dispatch(setJwt(token))
+
+            recentSearchedUsers && dispatch(setRecentSearchedUsers(recentSearchedUsers))
+            recentSearches && dispatch(setRecentSearches(recentSearches))
         
             navigation.reset({
                 index: 0,

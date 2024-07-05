@@ -7,6 +7,8 @@ const constants = {
     ACTIVE_USER_ID: 'active_user_id',
     ACTIVE_API_TOKEN: 'active_api_token',
     ACTIVE_USER_DATA: 'activeUserData',
+    RECENT_SEARCHED_USERS: 'recentSearchedUsers',
+    RECENT_SEARCHES: 'recentSearches',
     API_TIMEOUT: 5000,
     AUTH_TOKEN: 'auth_token',
 }
@@ -24,6 +26,8 @@ export const dimensions = {
 export const placeholders = {
     NO_USERS_FOLLOWED_TITLE: 'Get Started by Following Users!',
     NO_USERS_FOLLOWED_SUBTITLE: "Looks like you're new here! Start exploring by following some users to see their latest posts.",
+    NO_RECENT_SEARCHED_USERS: 'No Recent Searched Users',
+    NO_RECENT_SEARCHES: 'No Recent Searches',
 }
 
 export const getViewSwitcherOptions = () => [

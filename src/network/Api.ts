@@ -1,6 +1,6 @@
 import axios from "axios"
 import constants from "../utils/Constants"
-import User, { UnregisteredUser } from "../data/models/User"
+import User, { UnregisteredUser, UserPreview } from "../data/models/User"
 import { Post, UnuploadedPost } from "../data/models/Post"
 import UserPostsResponse from "../data/models/api/UserPostsResponse"
 import APIObjectParser from "../utils/APIObjectParser"
@@ -15,6 +15,7 @@ export default class Api {
     private static UPDATE_PROFILE = `${this.BASE_URL}/user/update-profile`
     private static CREATE_POST = `${this.BASE_URL}/post/create`
     private static GET_USER_POSTS = `${this.BASE_URL}/post/get-user-posts`
+    private static SEARCH = `${this.BASE_URL}/user/search`
 
     static async register(user: UnregisteredUser): Promise<User> {
         return new Promise((resolve, reject) => {
@@ -135,6 +136,23 @@ export default class Api {
                 resolve(APIObjectParser.userPostResponseToPost(response.data))
             }).catch(error => {
                 console.log(TAG, 'getUserPosts: error ->', error)
+                
+                reject(error)
+            })
+        })
+    }
+
+    static async search(query: string, offset: number, jwt: string) {
+        return new Promise<UserPreview[]>((resolve, reject) => {
+            axios.get(`${this.SEARCH}?query=${query}&offset=${offset}`, {
+                timeout: constants.API_TIMEOUT,
+                headers: { Authorization: `Bearer ${jwt}` }
+            }).then(response => {
+                console.log(TAG, 'search: response ->', response)
+                
+                resolve(APIObjectParser.searchResponseToUser(response.data))
+            }).catch(error => {
+                console.log(TAG, 'search: error ->', error)
                 
                 reject(error)
             })

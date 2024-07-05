@@ -1,4 +1,5 @@
 import { PostsState } from "../../redux/slices/posts"
+import { SearchState } from "../../redux/slices/search"
 import AuthTokens from "./AuthTokens"
 import { Post } from "./Post"
 import UIController from "./UIController"
@@ -11,4 +12,5 @@ export default interface AppStore {
     uiController: UIController
     authTokens: AuthTokens
     posts: PostsState
+    search: SearchState
 }

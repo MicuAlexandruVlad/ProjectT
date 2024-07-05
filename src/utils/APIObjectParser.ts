@@ -1,4 +1,6 @@
 import { Post, PostUser } from "../data/models/Post";
+import { UserPreview } from "../data/models/User";
+import SearchResponse from "../data/models/api/SearchResponse";
 import UserPostsResponse, { PostField } from "../data/models/api/UserPostsResponse";
 
 export default class APIObjectParser {
@@ -27,5 +29,18 @@ export default class APIObjectParser {
         })
 
         return posts
+    }
+
+    static searchResponseToUser(data: SearchResponse) {
+        const users: UserPreview[] = data.users.map(user => {
+            return {
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                username: user.username,
+            }
+        })
+
+        return users
     }
 }

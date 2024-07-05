@@ -17,3 +17,10 @@ export interface UnregisteredUser {
     lastName: string
     username: string
 }
+
+export interface UserPreview {
+    id: number
+    firstName: string
+    lastName: string
+    username: string
+}

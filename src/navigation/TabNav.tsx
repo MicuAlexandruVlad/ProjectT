@@ -19,7 +19,6 @@ const TabNav = () => {
     }, [])
     
     return (
-        // TODO: bottom bar goes up when opening keyboard. Should be fixed but not a priority
         <Tab.Navigator initialRouteName='home' backBehavior='initialRoute' tabBar={ props => <CustomTabNav { ...props } /> }>
             { memoizedHomeScreen }
             <Tab.Screen name='search' component={ SearchScreen } options={{

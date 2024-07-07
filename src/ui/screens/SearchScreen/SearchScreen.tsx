@@ -81,7 +81,7 @@ const SearchScreen: React.FC<Props> = ({ navigation }): React.JSX.Element => {
     }, [])
 
     const openUserProfile = useCallback((userId: number) => {
-        // TODO: implement
+        navigation.navigate('UserProfileScreen', { userId })
     }, [])
 
     const noRecentSearchedUsers = useMemo(() => recentSearchedUsers.length === 0, [recentSearchedUsers])

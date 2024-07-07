@@ -7,6 +7,7 @@ type RootStackParamList = {
     SettingsScreen: undefined
     EditScreen: undefined
     CreatePostScreen: undefined
+    UserProfileScreen: { userId: number }
 }
 
 export default RootStackParamList
